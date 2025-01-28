@@ -1,0 +1,9 @@
+{
+    "updated": "Обновлено",
+    "weather": "Погода",
+    "enterCity": "Введите город",
+    "pleaseEnterCity": "Пожалуйста, введите город",
+    "onlyEnglishCharacters": "Только английские символы",
+    "submit": "Отправить",
+    "chooseCity": "Экран выбора города"
+}
