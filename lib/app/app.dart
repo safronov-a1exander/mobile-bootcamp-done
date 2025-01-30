@@ -9,7 +9,12 @@ import 'package:mobile_bootcamp_done/features/weather/domain/repositories/city_r
 import 'package:mobile_bootcamp_done/features/weather/domain/repositories/weather_repository.dart';
 import 'package:mobile_bootcamp_done/features/weather/presentation/bloc/city/city_bloc.dart';
 import 'package:mobile_bootcamp_done/features/weather/presentation/bloc/weather/weather_bloc.dart';
+import 'package:mobile_bootcamp_done/features/weather/presentation/location_screen.dart';
+import 'package:mobile_bootcamp_done/features/weather/presentation/weather_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:mobile_bootcamp_done/uikit/theme/theme.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class WeatherApp extends StatelessWidget {
   const WeatherApp({super.key, required apiClient}) : _apiClient = apiClient;
@@ -19,33 +24,47 @@ class WeatherApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider(
-          create: (context) => WeatherRepository(
-              weatherDataSource: WeathertDataSource(client: _apiClient)),
-        ),
-        RepositoryProvider(
-          create: (context) => CityRepository(
-              cityDataSource:
-                  LocalCityDataSource(storage: SharedPreferencesAsync())),
-        ),
-      ],
-      child: MultiBlocProvider(
         providers: [
-          BlocProvider(
-            create: (context) =>
-                CityBloc(cityRepository: context.read<ICityRepository>()),
+          RepositoryProvider<IWeatherRepository>(
+            create: (context) => WeatherRepository(
+                weatherDataSource: WeathertDataSource(client: _apiClient)),
           ),
-          BlocProvider(
-            create: (context) => WeatherBloc(
-                weatherRepository: context.read<IWeatherRepository>()),
+          RepositoryProvider<ICityRepository>(
+            create: (context) => CityRepository(
+                cityDataSource:
+                    LocalCityDataSource(storage: SharedPreferencesAsync())),
           ),
         ],
-        child: MaterialApp(
-          title: 'Flutter Demo', //TODO: Change the title
-          home: const Scaffold(),
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) =>
+                  CityBloc(cityRepository: context.read<ICityRepository>()),
+            ),
+            BlocProvider(
+              create: (context) => WeatherBloc(
+                  weatherRepository: context.read<IWeatherRepository>()),
+            ),
+          ],
+          child: MaterialApp(
+        title: 'Mobile-bootcamp-weather-app',
+        theme: theme,
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          Locale('en'),
+          Locale('ru'),
+        ],
+        routes: {
+            '/': (context) => const LocationScreen(),
+            '/weather': (context) =>  WeatherScreen(
+                ),
+          },
         ),
-      ),
-    );
+    ));
   }
 }
