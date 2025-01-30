@@ -5,5 +5,8 @@
     "pleaseEnterCity": "Пожалуйста, введите город",
     "onlyEnglishCharacters": "Только английские символы",
     "submit": "Отправить",
-    "chooseCity": "Экран выбора города"
+    "chooseCity": "Экран выбора города",
+    "failedToFetchData": "Ошибка загрузки данных погоды",
+    "feelsLike": "По ощущениям",
+    "lastUpdated": "Последнее обновление:"
 }

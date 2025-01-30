@@ -5,5 +5,8 @@
     "pleaseEnterCity": "Enter city name, please",
     "onlyEnglishCharacters": "Only english characters",
     "submit": "Submit",
-    "chooseCity": "City selection screen"
+    "chooseCity": "City selection screen",
+    "failedToFetchData": "Failed to fetch weather data",
+    "feelsLike": "Feels like",
+    "lastUpdated": "Last updated at:"
 }
