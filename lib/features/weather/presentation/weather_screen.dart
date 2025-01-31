@@ -22,15 +22,14 @@ class WeatherScreen extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: BlocBuilder<WeatherBloc, WeatherState>(
-              buildWhen: (previous, current) => (previous is WeatherInitialState),
+              buildWhen: (previous, current) =>
+                  (previous is WeatherInitialState),
               builder: (context, state) {
-                switch (state) {
-                  case (WeatherLoadingState()):
-                    return CircularProgressIndicator(
+                return switch (state) {
+                  WeatherLoadingState _ => CircularProgressIndicator(
                       color: AppColors.white1,
-                    );
-                  case (WeatherFailureState()):
-                    return Column(
+                    ),
+                  WeatherFailureState _ => Column(
                       children: [
                         Text(AppLocalizations.of(context)!.failedToFetchData),
                         SizedBox(
@@ -42,9 +41,8 @@ class WeatherScreen extends StatelessWidget {
                           ),
                         )
                       ],
-                    );
-                  case (WeatherSuccessState()):
-                    return Column(
+                    ),
+                  WeatherSuccessState _ => Column(
                       spacing: 20,
                       children: [
                         CurrentWeatherWidget(weatherModel: state.weather),
@@ -53,10 +51,9 @@ class WeatherScreen extends StatelessWidget {
                         AdditionalInfoWidget(),
                         SunAndMoonWidget(),
                       ],
-                    );
-                  default:
-                    return Placeholder();
-                }
+                    ),
+                  _ => SizedBox()
+                };
               },
             ),
           ),
