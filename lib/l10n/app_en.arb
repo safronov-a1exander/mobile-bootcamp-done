@@ -8,5 +8,21 @@
     "chooseCity": "City selection screen",
     "failedToFetchData": "Failed to fetch weather data",
     "feelsLike": "Feels like",
-    "lastUpdated": "Last updated at:"
+    "goBack": "Go back",
+    "lastUpdated": "Last updated at:",
+    "humidity": "Humidity",
+    "pressure": "Pressure",
+    "windSpeed": "Wind Speed",
+    "windDirection": "Wind Direction",
+    "precipitation": "Precipitation",
+    "visibility": "Visibility",
+    "uvIndex": "UV Index",
+    "sunrise": "Sunrise",
+    "sunset": "Sunset",
+    "moonrise": "Moonrise",
+    "moonset": "Moonset",
+    "mb": "mb",
+    "kph": "kph",
+    "mm": "mm",
+    "km": "km"
 }
