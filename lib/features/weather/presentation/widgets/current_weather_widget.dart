@@ -1,65 +1,68 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile_bootcamp_done/common/format_date.dart';
+import 'package:mobile_bootcamp_done/features/weather/domain/entities/weather_model.dart';
 import 'package:mobile_bootcamp_done/uikit/theme/app_colors.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CurrentWeatherWidget extends StatelessWidget {
-  const CurrentWeatherWidget({super.key});
+  const CurrentWeatherWidget({super.key, required this.weatherModel});
+  final WeatherModel weatherModel;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Icon(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              icon: const Icon(
                 Icons.settings,
                 color: AppColors.black2,
               ),
-              Text("London", style: Theme.of(context).textTheme.headlineSmall),
-              const Icon(Icons.add, color: AppColors.black2),
-            ],
-          ),
-          const SizedBox(height: 4),
-          Text(
-            "Thu, 18 February",
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-          const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.wb_sunny,
-                size: 50,
-                color: Colors.yellow,
-              ),
-              Text(
-                "9°",
-                style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                    fontWeight: FontWeight.w300, color: AppColors.white1),
-              )
-            ],
-          ),
-          const SizedBox(height: 4),
-          Center(
-            child: Text("6°/10° Feels like 5°",
-                style: Theme.of(context).textTheme.bodyMedium),
-          ),
-          const SizedBox(height: 4),
-          Center(
-            child: Text("Partly cloudy",
-                style: Theme.of(context).textTheme.bodyMedium),
-          ),
-          const SizedBox(height: 20),
-          Text(
-            "Updated 18/02 13:15",
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-        ],
-      ),
+              onPressed: ()=>Navigator.pushReplacementNamed(context, '/'),
+            ),
+            Text(weatherModel.location.name,
+                style: Theme.of(context).textTheme.headlineSmall),
+            const Icon(Icons.add, color: AppColors.black2),
+          ],
+        ),
+        const SizedBox(height: 4),
+        Text(
+          formatDate(),
+          style: Theme.of(context).textTheme.bodyLarge,
+        ),
+        const SizedBox(height: 16),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CachedNetworkImage(imageUrl: "https:${weatherModel.current.condition.icon}"),
+            Text(
+              "${weatherModel.current.tempC}°",
+              style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                  fontWeight: FontWeight.w300, color: AppColors.white1),
+            )
+          ],
+        ),
+        const SizedBox(height: 4),
+        Center(
+          child: Text(
+              "${weatherModel.forecast?.forecastDay.first.day.mintempC ?? ''}°/${weatherModel.forecast?.forecastDay.first.day.maxtempC} ${AppLocalizations.of(context)!.feelsLike} ${weatherModel.current.feelslikeC}°",
+              style: Theme.of(context).textTheme.bodyMedium),
+        ),
+        const SizedBox(height: 4),
+        Center(
+          child: Text(weatherModel.current.condition.text,
+              style: Theme.of(context).textTheme.bodyMedium),
+        ),
+        const SizedBox(height: 20),
+        Text(
+          "${AppLocalizations.of(context)!.lastUpdated} ${weatherModel.current.lastUpdated}",
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
+      ],
     );
   }
 }

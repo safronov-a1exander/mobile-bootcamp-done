@@ -41,7 +41,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   ) async {
     emit(const WeatherState.loading());
     try {
-      WeatherModel weather = await _weatherRepository.getCurrent(event.city);
+      WeatherModel weather = await _weatherRepository.getForecast(event.city);
       emit(WeatherState.success(weather));
     } on Object {
       emit(const WeatherState.failure());
