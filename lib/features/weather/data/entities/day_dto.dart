@@ -51,4 +51,3 @@ class DayDTO {
   factory DayDTO.fromJson(Map<String, dynamic> json) => _$DayDTOFromJson(json);
   Map<String, dynamic> toJson() => _$DayDTOToJson(this);
 }
-

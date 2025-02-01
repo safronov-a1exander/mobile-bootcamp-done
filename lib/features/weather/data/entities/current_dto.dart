@@ -58,6 +58,3 @@ class CurrentDTO {
       _$CurrentDTOFromJson(json);
   Map<String, dynamic> toJson() => _$CurrentDTOToJson(this);
 }
-
-
-

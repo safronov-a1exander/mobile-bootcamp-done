@@ -47,24 +47,23 @@ class WeatherApp extends StatelessWidget {
             ),
           ],
           child: MaterialApp(
-        title: 'Mobile-bootcamp-weather-app',
-        theme: theme,
-        localizationsDelegates: [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: [
-          Locale('en'),
-          Locale('ru'),
-        ],
-        routes: {
-            '/': (context) => const LocationScreen(),
-            '/weather': (context) =>  WeatherScreen(
-                ),
-          },
-        ),
-    ));
+            title: 'Mobile-bootcamp-weather-app',
+            theme: theme,
+            localizationsDelegates: [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: [
+              Locale('en'),
+              Locale('ru'),
+            ],
+            routes: {
+              '/': (context) => const LocationScreen(),
+              '/weather': (context) => WeatherScreen(),
+            },
+          ),
+        ));
   }
 }

@@ -22,7 +22,7 @@ class CurrentWeatherWidget extends StatelessWidget {
                 Icons.settings,
                 color: AppColors.black2,
               ),
-              onPressed: ()=>Navigator.pushReplacementNamed(context, '/'),
+              onPressed: () => Navigator.pushReplacementNamed(context, '/'),
             ),
             Text(weatherModel.location.name,
                 style: Theme.of(context).textTheme.headlineSmall),
@@ -38,7 +38,8 @@ class CurrentWeatherWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CachedNetworkImage(imageUrl: "https:${weatherModel.current.condition.icon}"),
+            CachedNetworkImage(
+                imageUrl: "https:${weatherModel.current.condition.icon}"),
             Text(
               "${weatherModel.current.tempC}°",
               style: Theme.of(context).textTheme.displayLarge?.copyWith(

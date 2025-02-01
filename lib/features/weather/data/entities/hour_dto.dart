@@ -82,7 +82,3 @@ class HourDTO {
       _$HourDTOFromJson(json);
   Map<String, dynamic> toJson() => _$HourDTOToJson(this);
 }
-
-
-
-

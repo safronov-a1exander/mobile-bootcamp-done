@@ -21,6 +21,3 @@ class LocationDTO {
       _$LocationDTOFromJson(json);
   Map<String, dynamic> toJson() => _$LocationDTOToJson(this);
 }
-
-
-
